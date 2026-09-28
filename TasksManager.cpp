@@ -25,7 +25,6 @@ bool TasksManager::AddTask()
 bool TasksManager::RenameTask()
 {	
 	std::size_t task_index;
-	std::string new_task_name;
 	Task* renamable_task;
 
 	system("cls");
@@ -39,15 +38,47 @@ bool TasksManager::RenameTask()
 	}
 
 	try {
+		int choice;
+
 		renamable_task = TasksManager::tasks_list.at(task_index);
 
 		system("cls");
-		std::cout << "Введите новое имя задачи:" << std::endl;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::getline(std::cin, new_task_name);
+		std::cout << "Что вы собираетесь сделать?" << std::endl;
+		std::cout << "\n[1] Переименовать название | [2] Переименовать описание" << std::endl;
+		std::cin >> choice;
 
-		renamable_task->setName(new_task_name);
-		return true;
+		if (choice < 1 && choice > 2) {
+			return true;
+		}
+
+		switch (choice)
+		{
+			case 1:
+			{
+				std::string new_task_name;
+
+				system("cls");
+				std::cout << "Введите новое имя задачи:" << std::endl;
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::getline(std::cin, new_task_name);
+
+				renamable_task->setName(new_task_name);
+				return true;
+			}
+
+			case 2:
+			{
+				std::string new_task_desc;
+
+				system("cls");
+				std::cout << "Введите новое описание задачи:" << std::endl;
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::getline(std::cin, new_task_desc);
+
+				renamable_task->setDescription(new_task_desc);
+				return true;
+			}
+		}
 	}
 	catch (std::out_of_range e) {
 		std::cout << "Неверный индекс!" << std::endl;
