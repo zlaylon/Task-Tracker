@@ -12,5 +12,7 @@ class TasksManager
 		bool RenameTask();
 
 		bool DeleteTask();
+
+		void DeleteAllCompletedTasks();
 };
 

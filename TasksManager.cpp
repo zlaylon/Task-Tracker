@@ -1,4 +1,4 @@
-#include "TasksManager.h"
+ï»¿#include "TasksManager.h"
 #include <iostream>
 #include <string>
 
@@ -8,12 +8,12 @@ bool TasksManager::AddTask()
 	std::string user_desc;
 
 	system("cls");
-	std::cout << "Ââåäèòå íàçâàíèå çàäà÷è:" << std::endl;
+	std::cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ Ğ·Ğ°Ğ´Ğ°Ñ‡Ğ¸:" << std::endl;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::getline(std::cin, user_name);
 
 	system("cls");
-	std::cout << "Ââåäèòå îïèñàíèå çàäà÷è:" << std::endl;
+	std::cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ¾Ğ¿Ğ¸ÑĞ°Ğ½Ğ¸Ğµ Ğ·Ğ°Ğ´Ğ°Ñ‡Ğ¸:" << std::endl;
 	std::getline(std::cin, user_desc);
 
 	Task* new_task = new Task(user_name, user_desc);
@@ -29,10 +29,10 @@ bool TasksManager::RenameTask()
 	Task* renamable_task;
 
 	system("cls");
-	std::cout << "Ââåäèòå èíäåêñ çàäà÷è" << std::endl;
+	std::cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ¸Ğ½Ğ´ĞµĞºÑ Ğ·Ğ°Ğ´Ğ°Ñ‡Ğ¸" << std::endl;
 	std::cin >> task_index;
 	if (std::cin.fail()) {
-		std::cout << "Íåâåğíûé èíäåêñ!" << std::endl;
+		std::cout << "ĞĞµĞ²ĞµÑ€Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ğ´ĞµĞºÑ!" << std::endl;
 		std::cin.get();
 		std::cin.clear();
 		return true;
@@ -42,7 +42,7 @@ bool TasksManager::RenameTask()
 		renamable_task = TasksManager::tasks_list.at(task_index);
 
 		system("cls");
-		std::cout << "Ââåäèòå íîâîå èìÿ çàäà÷è:" << std::endl;
+		std::cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ½Ğ¾Ğ²Ğ¾Ğµ Ğ¸Ğ¼Ñ Ğ·Ğ°Ğ´Ğ°Ñ‡Ğ¸:" << std::endl;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::getline(std::cin, new_task_name);
 
@@ -50,7 +50,7 @@ bool TasksManager::RenameTask()
 		return true;
 	}
 	catch (std::out_of_range e) {
-		std::cout << "Íåâåğíûé èíäåêñ!" << std::endl;
+		std::cout << "ĞĞµĞ²ĞµÑ€Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ğ´ĞµĞºÑ!" << std::endl;
 		std::cin.get();
 		std::cin.clear();
 		return true;
@@ -62,16 +62,16 @@ bool TasksManager::DeleteTask()
 	std::size_t task_index;
 
 	system("cls");
-	std::cout << "Ââåäèòå èíäåêñ çàäà÷è:" << std::endl;
+	std::cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ¸Ğ½Ğ´ĞµĞºÑ Ğ·Ğ°Ğ´Ğ°Ñ‡Ğ¸:" << std::endl;
 	std::cin >> task_index;
 	if (std::cin.fail()) {
-		std::cout << "Íåâåğíûé èíäåêñ!" << std::endl;
+		std::cout << "ĞĞµĞ²ĞµÑ€Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ğ´ĞµĞºÑ!" << std::endl;
 		std::cin.get();
 		std::cin.clear();
 		return true;
 	}
 	else if (task_index < 0 || task_index > TasksManager::tasks_list.size()) {
-		std::cout << "Íåâåğíûé èíäåêñ!" << std::endl;
+		std::cout << "ĞĞµĞ²ĞµÑ€Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ğ´ĞµĞºÑ!" << std::endl;
 		std::cin.get();
 		return true;
 	}
@@ -81,10 +81,21 @@ bool TasksManager::DeleteTask()
 		TasksManager::tasks_list.erase(TasksManager::tasks_list.begin() + task_index);
 	}
 	catch (std::exception e) {
-		std::cout << "Íåâåğíûé èíäåêñ" << std::endl;
+		std::cout << "ĞĞµĞ²ĞµÑ€Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ğ´ĞµĞºÑ" << std::endl;
 		std::cin.get();
 		std::cin.clear();
 		return true;
+	}
+}
+
+void TasksManager::DeleteAllCompletedTasks()
+{
+	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
+		Task* task = TasksManager::tasks_list.at(index);
+		if (task->getCompletion() == "Ğ—Ğ°Ğ²ĞµÑ€ÑˆĞµĞ½Ğ¾") {
+			delete task;
+			TasksManager::tasks_list.erase(TasksManager::tasks_list.begin() + index);
+		}
 	}
 }
 

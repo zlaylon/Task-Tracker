@@ -8,14 +8,15 @@ TasksManager* tskmng = new TasksManager();
 
 int main()
 {
+	setlocale(LC_ALL, "");
+
 	while (true)
 	{
 		system("cls");
-		setlocale(LC_ALL, "");
 
 		int user_input{};
 
-		std::cout << "Трекер задач (1.1)" << std::endl;
+		std::cout << "Трекер задач (1.2)" << std::endl;
 
 		if (tskmng->tasks_list.empty()) {
 			std::cout << "\n";
@@ -33,6 +34,7 @@ int main()
 		}
 		std::cout << "\nУчтите, что имя/описание задачи работает корректно только на английском языке!" << std::endl;
 		std::cout << "[1] Создать задачу | [2] Изменить название задачи | [3] Удалить задачу | [4] Пометить задачу как завершенная" << std::endl;
+		std::cout << "[5] Удалить все выполненные задачи" << std::endl;
 
 		std::cin >> user_input;
 
@@ -89,6 +91,12 @@ int main()
 					std::cin.get();
 					break;
 				}
+				break;
+			}
+
+			case 5:
+			{
+				tskmng->DeleteAllCompletedTasks();
 				break;
 			}
 		}
