@@ -1,0 +1,9 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/Task Tracker/.vs/Task Tracker
+/Task Tracker/x64/Release
+/Task Tracker/x64/Debug
+/x64/Debug
+/x64/Release
