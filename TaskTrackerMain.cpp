@@ -17,6 +17,7 @@ int main()
 		int user_input{};
 
 		std::cout << "Трекер задач (1.3)" << std::endl;
+		std::cout << "Выполнено: " << tskmng->GetAllCompletedTasks() << " из " << tskmng->GetAllTasks() << std::endl;
 
 		if (tskmng->tasks_list.empty()) {
 			std::cout << "\n";

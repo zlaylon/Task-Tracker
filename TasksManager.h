@@ -14,5 +14,9 @@ class TasksManager
 		bool DeleteTask();
 
 		void DeleteAllCompletedTasks();
+
+		int GetAllTasks();
+
+		int GetAllCompletedTasks();
 };
 

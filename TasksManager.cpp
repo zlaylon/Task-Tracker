@@ -122,11 +122,38 @@ bool TasksManager::DeleteTask()
 void TasksManager::DeleteAllCompletedTasks()
 {
 	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
-		Task* task = TasksManager::tasks_list.at(index);
-		if (task->getCompletion() == "Завершено") {
-			delete task;
+		Task* task_ptr = TasksManager::tasks_list.at(index);
+
+		if (task_ptr->getCompletion() == "Завершено") {
+			delete task_ptr;
 			TasksManager::tasks_list.erase(TasksManager::tasks_list.begin() + index);
 		}
+		task_ptr = nullptr;
 	}
+}
+
+int TasksManager::GetAllTasks()
+{
+	int all_tasks{};
+
+	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
+		all_tasks++;
+	}
+
+	return all_tasks;
+}
+
+int TasksManager::GetAllCompletedTasks()
+{
+	int all_completed_tasks{};
+
+	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
+		Task* _task = TasksManager::tasks_list.at(index);
+		if (_task->getCompletion() == "Завершено") {
+			all_completed_tasks++;
+		}
+	}
+
+	return all_completed_tasks;
 }
 

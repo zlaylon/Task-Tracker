@@ -1,4 +1,4 @@
-#include "Task.h"
+п»ї#include "Task.h"
 #include <iostream>
 
 Task::Task(std::string _name, std::string _desc)
@@ -37,7 +37,7 @@ std::string Task::getDescription()
 std::string Task::getCompletion()
 {
 	if (this->isCompleted) {
-		return "Завершено";
+		return "Р—Р°РІРµСЂС€РµРЅРѕ";
 	}
-	else { return "Не завершено"; }
+	else { return "РќРµ Р·Р°РІРµСЂС€РµРЅРѕ"; }
 }
