@@ -19,6 +19,7 @@ int main()
 		std::cout << "Трекер задач (1.3)" << std::endl;
 		std::cout << "Выполнено: " << tskmng->GetAllCompletedTasks() << " из " << tskmng->GetAllTasks() << std::endl;
 
+		// Если список задач пуст, говорим что задач нет. В ином случае начинаем клипать задачи по шаблону, в размере их количества у пользователя
 		if (tskmng->tasks_list.empty()) {
 			std::cout << "\n";
 			std::cout << "У вас не имеется задач!" << std::endl;
@@ -33,12 +34,14 @@ int main()
 				std::cout << "------------------------------------------------" << std::endl;
 			}
 		}
+		// TODO: Пофиксить баг с std::cin
 		std::cout << "\nУчтите, что имя/описание задачи работает корректно только на английском языке!" << std::endl;
 		std::cout << "[1] Создать задачу | [2] Изменить название задачи | [3] Удалить задачу | [4] Пометить задачу как завершенная" << std::endl;
 		std::cout << "[5] Удалить все выполненные задачи" << std::endl;
 
 		std::cin >> user_input;
 
+		// Если пользователь вписал какую-то ахинею -> посылаем его в начало приложения
 		if (std::cin.fail())
 		{
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), ' ');
@@ -48,33 +51,29 @@ int main()
 			std::cin.get();
 		}
 
+		// В соответствующих .cpp файлах возвращаем true когда необходимо вернуться в меню
+		// break завершит цикл, и вернёт нас в начало
 		switch (user_input)
 		{
-			case 1:
+			case 1: // Добавление задачи
 			{
-				while (tskmng->AddTask()) {
-					break;
-				}
+				while (tskmng->AddTask()) { break; }
 				break;
 			}
 
-			case 2:
+			case 2: // Переименование задачи
 			{
-				while (tskmng->RenameTask()) {
-					break;
-				}
+				while (tskmng->RenameTask()) { break; }
 				break;
 			}
 
-			case 3:
+			case 3: // Удаление задачи
 			{
-				while (tskmng->DeleteTask()) {
-					break;
-				}
+				while (tskmng->DeleteTask()) { break; }
 				break;
 			}
 
-			case 4:
+			case 4: // Завершение задачи
 			{
 				Task* completable_task;
 				std::size_t index;
@@ -95,7 +94,7 @@ int main()
 				break;
 			}
 
-			case 5:
+			case 5: // Удаление всех завершенных задач
 			{
 				tskmng->DeleteAllCompletedTasks();
 				break;
