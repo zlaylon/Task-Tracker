@@ -93,6 +93,7 @@ bool TasksManager::DeleteTask()
 	std::size_t task_index;
 
 	system("cls");
+	// Вводим индекс задачи и проверяем, не является ли он некорректным
 	std::cout << "Введите индекс задачи:" << std::endl;
 	std::cin >> task_index;
 	if (std::cin.fail()) {
@@ -107,6 +108,8 @@ bool TasksManager::DeleteTask()
 		return true;
 	}
 
+	// После этого пробуем удалить задачу, и проводим еще одну проверку на неверный индекс, чтоб жизнь малиной не казалась
+	// (не крашнуло приложение)
 	try {
 		delete TasksManager::tasks_list.at(task_index);
 		TasksManager::tasks_list.erase(TasksManager::tasks_list.begin() + task_index);
@@ -124,6 +127,8 @@ void TasksManager::DeleteAllCompletedTasks()
 	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
 		Task* task_ptr = TasksManager::tasks_list.at(index);
 
+		// TODO: Убрать хардкод
+		// Находим все задачи чьи статусы равны завершенным и удаляем их из списка
 		if (task_ptr->getCompletion() == "Завершено") {
 			delete task_ptr;
 			TasksManager::tasks_list.erase(TasksManager::tasks_list.begin() + index);
@@ -136,9 +141,8 @@ int TasksManager::GetAllTasks()
 {
 	int all_tasks{};
 
-	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
-		all_tasks++;
-	}
+	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) 
+	{ all_tasks++; }
 
 	return all_tasks;
 }
@@ -149,9 +153,8 @@ int TasksManager::GetAllCompletedTasks()
 
 	for (std::size_t index = 0; index < TasksManager::tasks_list.size(); index++) {
 		Task* _task = TasksManager::tasks_list.at(index);
-		if (_task->getCompletion() == "Завершено") {
-			all_completed_tasks++;
-		}
+		if (_task->getCompletion() == "Завершено") 
+		{ all_completed_tasks++; }
 	}
 
 	return all_completed_tasks;

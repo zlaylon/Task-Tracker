@@ -19,9 +19,7 @@ void Task::setDescription(std::string new_description)
 
 void Task::completeTask()
 {
-	if (!this->isCompleted) {
-		this->isCompleted = true;
-	}
+	if (!this->isCompleted) { this->isCompleted = true; }
 }
 
 std::string Task::getName()
@@ -36,8 +34,5 @@ std::string Task::getDescription()
 
 std::string Task::getCompletion()
 {
-	if (this->isCompleted) {
-		return "Завершено";
-	}
-	else { return "Не завершено"; }
+	return isCompleted ? "Завершено" : "Не завершено";
 }
